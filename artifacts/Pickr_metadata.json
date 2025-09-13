@@ -11,6 +11,31 @@
 				"type": "constructor"
 			},
 			{
+				"inputs": [],
+				"name": "ErrorCodeAlreadyUsed",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "ErrorCodeIsRequired",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "ErrorDepositRequired",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "ErrorMaxParticipantLessThanMin",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "ErrorMinParticipantMustBeGreaterThanZero",
+				"type": "error"
+			},
+			{
 				"anonymous": false,
 				"inputs": [
 					{
@@ -499,11 +524,19 @@
 	},
 	"sources": {
 		"contracts/Pickr.sol": {
-			"keccak256": "0x0c7e43911f627dfe8a7833f4113828860c46915feaeae5169798275a96d8a4e4",
+			"keccak256": "0x18a752b62fb51f66c150a3213db72d376e947efcf97b5215860012b9547bd552",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://c699fd0b6c53bf00e0f97d56442c775a7fe260c9ffdf5a3886e9e34eb9d567c2",
-				"dweb:/ipfs/QmQB2mnpfHK3P1CyMpB6uTgtSwRCLPFsEtGRE5wakvgTdi"
+				"bzz-raw://f9af270a7984c3ceecbe95eb442aa971bdbbfda47e1a6a0b6f28a4c9191f4308",
+				"dweb:/ipfs/QmbLRuZxbdH63ftBEcVXC2F3GiZZd7WkSz8n23nDeevY8j"
+			]
+		},
+		"contracts/interfaces/IPickr.sol": {
+			"keccak256": "0x8d7cf17e063cc1891c7cd1ff94d95d97f0dff4e08fe63027299f1dbbdf110a3f",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://d1d973736b4e78a547f596ac46197ad988cffab13c07dcf5848a381d064a3475",
+				"dweb:/ipfs/QmX3Gv4HfV5GYu1pACPacJ2iuSe4KFB4spCjsQ7LDcJKdy"
 			]
 		}
 	},

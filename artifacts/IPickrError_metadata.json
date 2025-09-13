@@ -4,7 +4,33 @@
 	},
 	"language": "Solidity",
 	"output": {
-		"abi": [],
+		"abi": [
+			{
+				"inputs": [],
+				"name": "ErrorCodeAlreadyUsed",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "ErrorCodeIsRequired",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "ErrorDepositRequired",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "ErrorMaxParticipantLessThanMin",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "ErrorMinParticipantMustBeGreaterThanZero",
+				"type": "error"
+			}
+		],
 		"devdoc": {
 			"kind": "dev",
 			"methods": {},
@@ -18,7 +44,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/interfaces/IPickr.sol": "IPickr"
+			"contracts/interfaces/IPickr.sol": "IPickrError"
 		},
 		"evmVersion": "shanghai",
 		"libraries": {},

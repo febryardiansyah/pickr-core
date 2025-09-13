@@ -1,7 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-contract Pickr {
+import "contracts/interfaces/IPickr.sol";
+
+contract Pickr is IPickr, IPickrError {
     constructor() {
         owner = msg.sender;
     }
@@ -69,14 +71,15 @@ contract Pickr {
         uint256 minParticipant,
         string calldata code
     ) external payable returns (string memory) {
-        require(msg.value > 0, "Initial deposit is required");
-        require(
-            maxParticipant > minParticipant,
-            "Max participant must be greater than min participant"
-        );
-        require(minParticipant > 0, "Min participant must be greater than 0");
-        require(bytes(code).length > 0, "Code is required");
-        require(!_isRaffleExist(code), "Code already used"); // added
+        if (msg.value == 0) revert ErrorDepositRequired();
+        if (maxParticipant < minParticipant) {
+            revert ErrorMaxParticipantLessThanMin();
+        }
+        if (minParticipant < 0) {
+            revert ErrorMinParticipantMustBeGreaterThanZero();
+        }
+        if (bytes(code).length < 0) revert ErrorCodeIsRequired();
+        if (_isRaffleExist(code)) revert ErrorCodeAlreadyUsed();
 
         raffles[code] = Raffle(
             msg.sender,
@@ -226,15 +229,15 @@ contract Pickr {
         return raffles[code].creator != address(0);
     }
 
-    function getUserRaffleCodes(address creator) external view returns (string[] memory) {
+    function getUserRaffleCodes(
+        address creator
+    ) external view returns (string[] memory) {
         return raffleCodesByCreator[creator];
     }
 
-    function getUserRaffles(address creator)
-        external
-        view
-        returns (Raffle[] memory, string[] memory)
-    {
+    function getUserRaffles(
+        address creator
+    ) external view returns (Raffle[] memory, string[] memory) {
         string[] memory codes = raffleCodesByCreator[creator];
         Raffle[] memory list = new Raffle[](codes.length);
         for (uint256 i = 0; i < codes.length; i++) {
