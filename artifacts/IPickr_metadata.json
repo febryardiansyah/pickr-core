@@ -1,0 +1,45 @@
+{
+	"compiler": {
+		"version": "0.8.20+commit.a1b79de6"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"contracts/interfaces/IPickr.sol": "IPickr"
+		},
+		"evmVersion": "shanghai",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"contracts/interfaces/IPickr.sol": {
+			"keccak256": "0xe52cc2e114318ca5db451bc978133a11743141c81b919a2f476a033c157e347a",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://95321ed51b1111301872d16bbb00993b02b7aa182584c8cb347eb038dc5fc757",
+				"dweb:/ipfs/QmdVfGatHRFfn33f7xj46HyuQdMF1r7gW7nYVEm5s1WGcq"
+			]
+		}
+	},
+	"version": 1
+}
