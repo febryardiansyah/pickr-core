@@ -2,17 +2,17 @@
 pragma solidity ^0.8.20;
 
 interface IPickr {
-    enum RaffleStatus {
+    enum RoomStatus {
         ACTIVE,
         INACTIVE,
         STARTED
     }
 
     // models
-    struct Raffle {
+    struct Room {
         address creator;
         uint256 balance;
-        RaffleStatus status;
+        RoomStatus status;
         uint256 maxParticipant;
         uint256 minParticipant;
         uint256 totalParticipant;
@@ -21,18 +21,18 @@ interface IPickr {
 
     // errors
     error ErrorNotAuthorized(address caller);
-    error ErrorRaffleIsNotExist(bytes32 codeHash);
+    error ErrorRoomIsNotExist(bytes32 codeHash);
     error ErrorCodeIsRequired();
-    error ErrorRaffleIsNotActive(bytes32 codeHash);
-    error ErrorRaffleIsNotStarted(bytes32 codeHash);
+    error ErrorRoomIsNotActive(bytes32 codeHash);
+    error ErrorRoomIsNotStarted(bytes32 codeHash);
 
-    // create raffle errors
+    // create room errors
     error ErrorDepositRequired();
     error ErrorMaxParticipantLessThanMin();
     error ErrorMinParticipantMustBeGreaterThanZero();
     error ErrorCodeAlreadyUsed(bytes32 codeHash);
 
-    // start raffle errors
+    // start room errors
     error ErrorNotEnoughParticipant(bytes32 codeHash);
 
     // winner selected errors
@@ -40,11 +40,11 @@ interface IPickr {
     error ErrorAddressIsNotParticipant(bytes32 codeHash, address addr);
     error ErrorNoBalance(bytes32 codeHash);
 
-    // join raffle errors
-    error ErrorUserIsTheRaffleOwner(bytes32 codeHash);
-    error ErrorRaffleIsFull(bytes32 codeHash);
-    error ErrorUserAlreadyJoinRaffle(bytes32 codeHash);
+    // join room errors
+    error ErrorUserIsTheRoomOwner(bytes32 codeHash);
+    error ErrorRoomIsFull(bytes32 codeHash);
+    error ErrorUserAlreadyJoinRoom(bytes32 codeHash);
 
-    // leave raffle errors
+    // leave room errors
     error ErrorUserIsNotParticipant(bytes32 codeHash);
 }
