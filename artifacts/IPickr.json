@@ -50,5 +50,174 @@
 		"gasEstimates": null,
 		"methodIdentifiers": {}
 	},
-	"abi": []
+	"abi": [
+		{
+			"inputs": [
+				{
+					"internalType": "bytes32",
+					"name": "codeHash",
+					"type": "bytes32"
+				},
+				{
+					"internalType": "address",
+					"name": "addr",
+					"type": "address"
+				}
+			],
+			"name": "ErrorAddressIsNotParticipant",
+			"type": "error"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "bytes32",
+					"name": "codeHash",
+					"type": "bytes32"
+				}
+			],
+			"name": "ErrorCodeAlreadyUsed",
+			"type": "error"
+		},
+		{
+			"inputs": [],
+			"name": "ErrorCodeIsRequired",
+			"type": "error"
+		},
+		{
+			"inputs": [],
+			"name": "ErrorDepositRequired",
+			"type": "error"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "bytes32",
+					"name": "codeHash",
+					"type": "bytes32"
+				}
+			],
+			"name": "ErrorInvalidWinner",
+			"type": "error"
+		},
+		{
+			"inputs": [],
+			"name": "ErrorMaxParticipantLessThanMin",
+			"type": "error"
+		},
+		{
+			"inputs": [],
+			"name": "ErrorMinParticipantMustBeGreaterThanZero",
+			"type": "error"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "bytes32",
+					"name": "codeHash",
+					"type": "bytes32"
+				}
+			],
+			"name": "ErrorNoBalance",
+			"type": "error"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address",
+					"name": "caller",
+					"type": "address"
+				}
+			],
+			"name": "ErrorNotAuthorized",
+			"type": "error"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "bytes32",
+					"name": "codeHash",
+					"type": "bytes32"
+				}
+			],
+			"name": "ErrorNotEnoughParticipant",
+			"type": "error"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "bytes32",
+					"name": "codeHash",
+					"type": "bytes32"
+				}
+			],
+			"name": "ErrorRaffleIsFull",
+			"type": "error"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "bytes32",
+					"name": "codeHash",
+					"type": "bytes32"
+				}
+			],
+			"name": "ErrorRaffleIsNotActive",
+			"type": "error"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "bytes32",
+					"name": "codeHash",
+					"type": "bytes32"
+				}
+			],
+			"name": "ErrorRaffleIsNotExist",
+			"type": "error"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "bytes32",
+					"name": "codeHash",
+					"type": "bytes32"
+				}
+			],
+			"name": "ErrorRaffleIsNotStarted",
+			"type": "error"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "bytes32",
+					"name": "codeHash",
+					"type": "bytes32"
+				}
+			],
+			"name": "ErrorUserAlreadyJoinRaffle",
+			"type": "error"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "bytes32",
+					"name": "codeHash",
+					"type": "bytes32"
+				}
+			],
+			"name": "ErrorUserIsNotParticipant",
+			"type": "error"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "bytes32",
+					"name": "codeHash",
+					"type": "bytes32"
+				}
+			],
+			"name": "ErrorUserIsTheRaffleOwner",
+			"type": "error"
+		}
+	]
 }

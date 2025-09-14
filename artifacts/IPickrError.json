@@ -50,31 +50,5 @@
 		"gasEstimates": null,
 		"methodIdentifiers": {}
 	},
-	"abi": [
-		{
-			"inputs": [],
-			"name": "ErrorCodeAlreadyUsed",
-			"type": "error"
-		},
-		{
-			"inputs": [],
-			"name": "ErrorCodeIsRequired",
-			"type": "error"
-		},
-		{
-			"inputs": [],
-			"name": "ErrorDepositRequired",
-			"type": "error"
-		},
-		{
-			"inputs": [],
-			"name": "ErrorMaxParticipantLessThanMin",
-			"type": "error"
-		},
-		{
-			"inputs": [],
-			"name": "ErrorMinParticipantMustBeGreaterThanZero",
-			"type": "error"
-		}
-	]
+	"abi": []
 }

@@ -4,7 +4,176 @@
 	},
 	"language": "Solidity",
 	"output": {
-		"abi": [],
+		"abi": [
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "codeHash",
+						"type": "bytes32"
+					},
+					{
+						"internalType": "address",
+						"name": "addr",
+						"type": "address"
+					}
+				],
+				"name": "ErrorAddressIsNotParticipant",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "codeHash",
+						"type": "bytes32"
+					}
+				],
+				"name": "ErrorCodeAlreadyUsed",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "ErrorCodeIsRequired",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "ErrorDepositRequired",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "codeHash",
+						"type": "bytes32"
+					}
+				],
+				"name": "ErrorInvalidWinner",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "ErrorMaxParticipantLessThanMin",
+				"type": "error"
+			},
+			{
+				"inputs": [],
+				"name": "ErrorMinParticipantMustBeGreaterThanZero",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "codeHash",
+						"type": "bytes32"
+					}
+				],
+				"name": "ErrorNoBalance",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "caller",
+						"type": "address"
+					}
+				],
+				"name": "ErrorNotAuthorized",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "codeHash",
+						"type": "bytes32"
+					}
+				],
+				"name": "ErrorNotEnoughParticipant",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "codeHash",
+						"type": "bytes32"
+					}
+				],
+				"name": "ErrorRaffleIsFull",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "codeHash",
+						"type": "bytes32"
+					}
+				],
+				"name": "ErrorRaffleIsNotActive",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "codeHash",
+						"type": "bytes32"
+					}
+				],
+				"name": "ErrorRaffleIsNotExist",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "codeHash",
+						"type": "bytes32"
+					}
+				],
+				"name": "ErrorRaffleIsNotStarted",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "codeHash",
+						"type": "bytes32"
+					}
+				],
+				"name": "ErrorUserAlreadyJoinRaffle",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "codeHash",
+						"type": "bytes32"
+					}
+				],
+				"name": "ErrorUserIsNotParticipant",
+				"type": "error"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "bytes32",
+						"name": "codeHash",
+						"type": "bytes32"
+					}
+				],
+				"name": "ErrorUserIsTheRaffleOwner",
+				"type": "error"
+			}
+		],
 		"devdoc": {
 			"kind": "dev",
 			"methods": {},
@@ -33,11 +202,11 @@
 	},
 	"sources": {
 		"contracts/interfaces/IPickr.sol": {
-			"keccak256": "0x8d7cf17e063cc1891c7cd1ff94d95d97f0dff4e08fe63027299f1dbbdf110a3f",
+			"keccak256": "0xfa572807c649b004fae30e905e358a0344e415c0fe0e82bcd9d24d84f1a0509a",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://d1d973736b4e78a547f596ac46197ad988cffab13c07dcf5848a381d064a3475",
-				"dweb:/ipfs/QmX3Gv4HfV5GYu1pACPacJ2iuSe4KFB4spCjsQ7LDcJKdy"
+				"bzz-raw://14a852db9ebfca9b6888f1ec0a9844e57835d5fd9d8ecfdd595e0d2500662870",
+				"dweb:/ipfs/QmWB4ZuwdbWh5gJ7V1mDegVaqR2bQsdNTKLAHba36B45xh"
 			]
 		}
 	},

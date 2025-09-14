@@ -4,33 +4,7 @@
 	},
 	"language": "Solidity",
 	"output": {
-		"abi": [
-			{
-				"inputs": [],
-				"name": "ErrorCodeAlreadyUsed",
-				"type": "error"
-			},
-			{
-				"inputs": [],
-				"name": "ErrorCodeIsRequired",
-				"type": "error"
-			},
-			{
-				"inputs": [],
-				"name": "ErrorDepositRequired",
-				"type": "error"
-			},
-			{
-				"inputs": [],
-				"name": "ErrorMaxParticipantLessThanMin",
-				"type": "error"
-			},
-			{
-				"inputs": [],
-				"name": "ErrorMinParticipantMustBeGreaterThanZero",
-				"type": "error"
-			}
-		],
+		"abi": [],
 		"devdoc": {
 			"kind": "dev",
 			"methods": {},
@@ -59,11 +33,11 @@
 	},
 	"sources": {
 		"contracts/interfaces/IPickr.sol": {
-			"keccak256": "0x8d7cf17e063cc1891c7cd1ff94d95d97f0dff4e08fe63027299f1dbbdf110a3f",
+			"keccak256": "0x0207519ba978d96696ce9a1334725c87c1ca2fdbc06cfb31594aeae666f15c46",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://d1d973736b4e78a547f596ac46197ad988cffab13c07dcf5848a381d064a3475",
-				"dweb:/ipfs/QmX3Gv4HfV5GYu1pACPacJ2iuSe4KFB4spCjsQ7LDcJKdy"
+				"bzz-raw://e504837867cc1297c0e6f3c2e370f0488207b84eca939c4a5b5a596a8e0c39e5",
+				"dweb:/ipfs/QmcfowMjVasbdv9HrxzFMh19KMcrjYx65CQ5hAAKtMfqfW"
 			]
 		}
 	},
