@@ -150,7 +150,7 @@
 					"type": "bytes32"
 				}
 			],
-			"name": "ErrorRaffleIsFull",
+			"name": "ErrorRoomIsFull",
 			"type": "error"
 		},
 		{
@@ -161,7 +161,7 @@
 					"type": "bytes32"
 				}
 			],
-			"name": "ErrorRaffleIsNotActive",
+			"name": "ErrorRoomIsNotActive",
 			"type": "error"
 		},
 		{
@@ -172,7 +172,7 @@
 					"type": "bytes32"
 				}
 			],
-			"name": "ErrorRaffleIsNotExist",
+			"name": "ErrorRoomIsNotExist",
 			"type": "error"
 		},
 		{
@@ -183,7 +183,7 @@
 					"type": "bytes32"
 				}
 			],
-			"name": "ErrorRaffleIsNotStarted",
+			"name": "ErrorRoomIsNotStarted",
 			"type": "error"
 		},
 		{
@@ -194,7 +194,7 @@
 					"type": "bytes32"
 				}
 			],
-			"name": "ErrorUserAlreadyJoinRaffle",
+			"name": "ErrorUserAlreadyJoinRoom",
 			"type": "error"
 		},
 		{
@@ -216,7 +216,7 @@
 					"type": "bytes32"
 				}
 			],
-			"name": "ErrorUserIsTheRaffleOwner",
+			"name": "ErrorUserIsTheRoomOwner",
 			"type": "error"
 		}
 	]

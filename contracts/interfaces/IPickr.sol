@@ -8,11 +8,17 @@ interface IPickr {
         STARTED
     }
 
+    enum RoomAccessMode {
+        PUBLIC,
+        PRIVATE
+    }
+
     // models
     struct Room {
         address creator;
         uint256 balance;
         RoomStatus status;
+        RoomAccessMode accessMode;
         uint256 maxParticipant;
         uint256 minParticipant;
         uint256 totalParticipant;

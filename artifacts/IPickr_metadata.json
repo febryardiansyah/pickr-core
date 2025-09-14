@@ -104,7 +104,7 @@
 						"type": "bytes32"
 					}
 				],
-				"name": "ErrorRaffleIsFull",
+				"name": "ErrorRoomIsFull",
 				"type": "error"
 			},
 			{
@@ -115,7 +115,7 @@
 						"type": "bytes32"
 					}
 				],
-				"name": "ErrorRaffleIsNotActive",
+				"name": "ErrorRoomIsNotActive",
 				"type": "error"
 			},
 			{
@@ -126,7 +126,7 @@
 						"type": "bytes32"
 					}
 				],
-				"name": "ErrorRaffleIsNotExist",
+				"name": "ErrorRoomIsNotExist",
 				"type": "error"
 			},
 			{
@@ -137,7 +137,7 @@
 						"type": "bytes32"
 					}
 				],
-				"name": "ErrorRaffleIsNotStarted",
+				"name": "ErrorRoomIsNotStarted",
 				"type": "error"
 			},
 			{
@@ -148,7 +148,7 @@
 						"type": "bytes32"
 					}
 				],
-				"name": "ErrorUserAlreadyJoinRaffle",
+				"name": "ErrorUserAlreadyJoinRoom",
 				"type": "error"
 			},
 			{
@@ -170,7 +170,7 @@
 						"type": "bytes32"
 					}
 				],
-				"name": "ErrorUserIsTheRaffleOwner",
+				"name": "ErrorUserIsTheRoomOwner",
 				"type": "error"
 			}
 		],
@@ -202,11 +202,11 @@
 	},
 	"sources": {
 		"contracts/interfaces/IPickr.sol": {
-			"keccak256": "0xfa572807c649b004fae30e905e358a0344e415c0fe0e82bcd9d24d84f1a0509a",
+			"keccak256": "0xb4bd6bb53db8f66fe3b6715c18784afeeef2109811332b4a61c0dcc28738b125",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://14a852db9ebfca9b6888f1ec0a9844e57835d5fd9d8ecfdd595e0d2500662870",
-				"dweb:/ipfs/QmWB4ZuwdbWh5gJ7V1mDegVaqR2bQsdNTKLAHba36B45xh"
+				"bzz-raw://ea3140fc43ac06ba723b57d29831ac6b358700c6fd5455261f04966804841263",
+				"dweb:/ipfs/QmSMCMfZXxeMHuaGMscLaFotxMgBNJvAJyvdEAf8HqUDih"
 			]
 		}
 	},

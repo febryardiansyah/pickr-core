@@ -1,5 +1,5 @@
 {
-	"id": "5171e4fe830d703910f444aea5ac8bf4",
+	"id": "b30a9845155c4d0309a652c60f91c684",
 	"_format": "hh-sol-build-info-1",
 	"solcVersion": "0.8.20",
 	"solcLongVersion": "0.8.20+commit.a1b79de6",
@@ -7,7 +7,7 @@
 		"language": "Solidity",
 		"sources": {
 			"contracts/interfaces/IPickr.sol": {
-				"content": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.20;\n\ninterface IPickr {\n    enum RaffleStatus {\n        ACTIVE,\n        INACTIVE,\n        STARTED\n    }\n\n    // models\n    struct Raffle {\n        address creator;\n        uint256 balance;\n        RaffleStatus status;\n        uint256 maxParticipant;\n        uint256 minParticipant;\n        uint256 totalParticipant;\n        uint64 createdAt;\n    }\n\n    // errors\n    error ErrorNotAuthorized(address caller);\n    error ErrorRaffleIsNotExist(bytes32 codeHash);\n    error ErrorCodeIsRequired();\n    error ErrorRaffleIsNotActive(bytes32 codeHash);\n    error ErrorRaffleIsNotStarted(bytes32 codeHash);\n\n    // create raffle errors\n    error ErrorDepositRequired();\n    error ErrorMaxParticipantLessThanMin();\n    error ErrorMinParticipantMustBeGreaterThanZero();\n    error ErrorCodeAlreadyUsed(bytes32 codeHash);\n\n    // start raffle errors\n    error ErrorNotEnoughParticipant(bytes32 codeHash);\n\n    // winner selected errors\n    error ErrorInvalidWinner(bytes32 codeHash);\n    error ErrorAddressIsNotParticipant(bytes32 codeHash, address addr);\n    error ErrorNoBalance(bytes32 codeHash);\n\n    // join raffle errors\n    error ErrorUserIsTheRaffleOwner(bytes32 codeHash);\n    error ErrorRaffleIsFull(bytes32 codeHash);\n    error ErrorUserAlreadyJoinRaffle(bytes32 codeHash);\n\n    // leave raffle errors\n    error ErrorUserIsNotParticipant(bytes32 codeHash);\n}\n"
+				"content": "// SPDX-License-Identifier: MIT\npragma solidity ^0.8.20;\n\ninterface IPickr {\n    enum RoomStatus {\n        ACTIVE,\n        INACTIVE,\n        STARTED\n    }\n\n    enum RoomAccessMode {\n        PUBLIC,\n        PRIVATE\n    }\n\n    // models\n    struct Room {\n        address creator;\n        uint256 balance;\n        RoomStatus status;\n        RoomAccessMode accessMode;\n        uint256 maxParticipant;\n        uint256 minParticipant;\n        uint256 totalParticipant;\n        uint64 createdAt;\n    }\n\n    // errors\n    error ErrorNotAuthorized(address caller);\n    error ErrorRoomIsNotExist(bytes32 codeHash);\n    error ErrorCodeIsRequired();\n    error ErrorRoomIsNotActive(bytes32 codeHash);\n    error ErrorRoomIsNotStarted(bytes32 codeHash);\n\n    // create room errors\n    error ErrorDepositRequired();\n    error ErrorMaxParticipantLessThanMin();\n    error ErrorMinParticipantMustBeGreaterThanZero();\n    error ErrorCodeAlreadyUsed(bytes32 codeHash);\n\n    // start room errors\n    error ErrorNotEnoughParticipant(bytes32 codeHash);\n\n    // winner selected errors\n    error ErrorInvalidWinner(bytes32 codeHash);\n    error ErrorAddressIsNotParticipant(bytes32 codeHash, address addr);\n    error ErrorNoBalance(bytes32 codeHash);\n\n    // join room errors\n    error ErrorUserIsTheRoomOwner(bytes32 codeHash);\n    error ErrorRoomIsFull(bytes32 codeHash);\n    error ErrorUserAlreadyJoinRoom(bytes32 codeHash);\n\n    // leave room errors\n    error ErrorUserIsNotParticipant(bytes32 codeHash);\n}\n"
 			}
 		},
 		"settings": {
@@ -142,7 +142,7 @@
 									"type": "bytes32"
 								}
 							],
-							"name": "ErrorRaffleIsFull",
+							"name": "ErrorRoomIsFull",
 							"type": "error"
 						},
 						{
@@ -153,7 +153,7 @@
 									"type": "bytes32"
 								}
 							],
-							"name": "ErrorRaffleIsNotActive",
+							"name": "ErrorRoomIsNotActive",
 							"type": "error"
 						},
 						{
@@ -164,7 +164,7 @@
 									"type": "bytes32"
 								}
 							],
-							"name": "ErrorRaffleIsNotExist",
+							"name": "ErrorRoomIsNotExist",
 							"type": "error"
 						},
 						{
@@ -175,7 +175,7 @@
 									"type": "bytes32"
 								}
 							],
-							"name": "ErrorRaffleIsNotStarted",
+							"name": "ErrorRoomIsNotStarted",
 							"type": "error"
 						},
 						{
@@ -186,7 +186,7 @@
 									"type": "bytes32"
 								}
 							],
-							"name": "ErrorUserAlreadyJoinRaffle",
+							"name": "ErrorUserAlreadyJoinRoom",
 							"type": "error"
 						},
 						{
@@ -208,7 +208,7 @@
 									"type": "bytes32"
 								}
 							],
-							"name": "ErrorUserIsTheRaffleOwner",
+							"name": "ErrorUserIsTheRoomOwner",
 							"type": "error"
 						}
 					],
@@ -240,7 +240,7 @@
 						"legacyAssembly": null,
 						"methodIdentifiers": {}
 					},
-					"metadata": "{\"compiler\":{\"version\":\"0.8.20+commit.a1b79de6\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"codeHash\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"addr\",\"type\":\"address\"}],\"name\":\"ErrorAddressIsNotParticipant\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"codeHash\",\"type\":\"bytes32\"}],\"name\":\"ErrorCodeAlreadyUsed\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ErrorCodeIsRequired\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ErrorDepositRequired\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"codeHash\",\"type\":\"bytes32\"}],\"name\":\"ErrorInvalidWinner\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ErrorMaxParticipantLessThanMin\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ErrorMinParticipantMustBeGreaterThanZero\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"codeHash\",\"type\":\"bytes32\"}],\"name\":\"ErrorNoBalance\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"caller\",\"type\":\"address\"}],\"name\":\"ErrorNotAuthorized\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"codeHash\",\"type\":\"bytes32\"}],\"name\":\"ErrorNotEnoughParticipant\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"codeHash\",\"type\":\"bytes32\"}],\"name\":\"ErrorRaffleIsFull\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"codeHash\",\"type\":\"bytes32\"}],\"name\":\"ErrorRaffleIsNotActive\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"codeHash\",\"type\":\"bytes32\"}],\"name\":\"ErrorRaffleIsNotExist\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"codeHash\",\"type\":\"bytes32\"}],\"name\":\"ErrorRaffleIsNotStarted\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"codeHash\",\"type\":\"bytes32\"}],\"name\":\"ErrorUserAlreadyJoinRaffle\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"codeHash\",\"type\":\"bytes32\"}],\"name\":\"ErrorUserIsNotParticipant\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"codeHash\",\"type\":\"bytes32\"}],\"name\":\"ErrorUserIsTheRaffleOwner\",\"type\":\"error\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/interfaces/IPickr.sol\":\"IPickr\"},\"evmVersion\":\"shanghai\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"contracts/interfaces/IPickr.sol\":{\"keccak256\":\"0xfa572807c649b004fae30e905e358a0344e415c0fe0e82bcd9d24d84f1a0509a\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://14a852db9ebfca9b6888f1ec0a9844e57835d5fd9d8ecfdd595e0d2500662870\",\"dweb:/ipfs/QmWB4ZuwdbWh5gJ7V1mDegVaqR2bQsdNTKLAHba36B45xh\"]}},\"version\":1}",
+					"metadata": "{\"compiler\":{\"version\":\"0.8.20+commit.a1b79de6\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"codeHash\",\"type\":\"bytes32\"},{\"internalType\":\"address\",\"name\":\"addr\",\"type\":\"address\"}],\"name\":\"ErrorAddressIsNotParticipant\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"codeHash\",\"type\":\"bytes32\"}],\"name\":\"ErrorCodeAlreadyUsed\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ErrorCodeIsRequired\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ErrorDepositRequired\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"codeHash\",\"type\":\"bytes32\"}],\"name\":\"ErrorInvalidWinner\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ErrorMaxParticipantLessThanMin\",\"type\":\"error\"},{\"inputs\":[],\"name\":\"ErrorMinParticipantMustBeGreaterThanZero\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"codeHash\",\"type\":\"bytes32\"}],\"name\":\"ErrorNoBalance\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"caller\",\"type\":\"address\"}],\"name\":\"ErrorNotAuthorized\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"codeHash\",\"type\":\"bytes32\"}],\"name\":\"ErrorNotEnoughParticipant\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"codeHash\",\"type\":\"bytes32\"}],\"name\":\"ErrorRoomIsFull\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"codeHash\",\"type\":\"bytes32\"}],\"name\":\"ErrorRoomIsNotActive\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"codeHash\",\"type\":\"bytes32\"}],\"name\":\"ErrorRoomIsNotExist\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"codeHash\",\"type\":\"bytes32\"}],\"name\":\"ErrorRoomIsNotStarted\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"codeHash\",\"type\":\"bytes32\"}],\"name\":\"ErrorUserAlreadyJoinRoom\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"codeHash\",\"type\":\"bytes32\"}],\"name\":\"ErrorUserIsNotParticipant\",\"type\":\"error\"},{\"inputs\":[{\"internalType\":\"bytes32\",\"name\":\"codeHash\",\"type\":\"bytes32\"}],\"name\":\"ErrorUserIsTheRoomOwner\",\"type\":\"error\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/interfaces/IPickr.sol\":\"IPickr\"},\"evmVersion\":\"shanghai\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"contracts/interfaces/IPickr.sol\":{\"keccak256\":\"0xb4bd6bb53db8f66fe3b6715c18784afeeef2109811332b4a61c0dcc28738b125\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://ea3140fc43ac06ba723b57d29831ac6b358700c6fd5455261f04966804841263\",\"dweb:/ipfs/QmSMCMfZXxeMHuaGMscLaFotxMgBNJvAJyvdEAf8HqUDih\"]}},\"version\":1}",
 					"storageLayout": {
 						"storage": [],
 						"types": null
@@ -259,10 +259,10 @@
 					"absolutePath": "contracts/interfaces/IPickr.sol",
 					"exportedSymbols": {
 						"IPickr": [
-							84
+							90
 						]
 					},
-					"id": 85,
+					"id": 91,
 					"license": "MIT",
 					"nodeType": "SourceUnit",
 					"nodes": [
@@ -284,58 +284,82 @@
 							"contractDependencies": [],
 							"contractKind": "interface",
 							"fullyImplemented": true,
-							"id": 84,
+							"id": 90,
 							"linearizedBaseContracts": [
-								84
+								90
 							],
 							"name": "IPickr",
 							"nameLocation": "68:6:0",
 							"nodeType": "ContractDefinition",
 							"nodes": [
 								{
-									"canonicalName": "IPickr.RaffleStatus",
+									"canonicalName": "IPickr.RoomStatus",
 									"id": 5,
 									"members": [
 										{
 											"id": 2,
 											"name": "ACTIVE",
-											"nameLocation": "109:6:0",
+											"nameLocation": "107:6:0",
 											"nodeType": "EnumValue",
-											"src": "109:6:0"
+											"src": "107:6:0"
 										},
 										{
 											"id": 3,
 											"name": "INACTIVE",
-											"nameLocation": "125:8:0",
+											"nameLocation": "123:8:0",
 											"nodeType": "EnumValue",
-											"src": "125:8:0"
+											"src": "123:8:0"
 										},
 										{
 											"id": 4,
 											"name": "STARTED",
-											"nameLocation": "143:7:0",
+											"nameLocation": "141:7:0",
 											"nodeType": "EnumValue",
-											"src": "143:7:0"
+											"src": "141:7:0"
 										}
 									],
-									"name": "RaffleStatus",
-									"nameLocation": "86:12:0",
+									"name": "RoomStatus",
+									"nameLocation": "86:10:0",
 									"nodeType": "EnumDefinition",
-									"src": "81:75:0"
+									"src": "81:73:0"
 								},
 								{
-									"canonicalName": "IPickr.Raffle",
-									"id": 21,
+									"canonicalName": "IPickr.RoomAccessMode",
+									"id": 8,
+									"members": [
+										{
+											"id": 6,
+											"name": "PUBLIC",
+											"nameLocation": "190:6:0",
+											"nodeType": "EnumValue",
+											"src": "190:6:0"
+										},
+										{
+											"id": 7,
+											"name": "PRIVATE",
+											"nameLocation": "206:7:0",
+											"nodeType": "EnumValue",
+											"src": "206:7:0"
+										}
+									],
+									"name": "RoomAccessMode",
+									"nameLocation": "165:14:0",
+									"nodeType": "EnumDefinition",
+									"src": "160:59:0"
+								},
+								{
+									"canonicalName": "IPickr.Room",
+									"id": 27,
 									"members": [
 										{
 											"constant": false,
-											"id": 7,
+											"id": 10,
 											"mutability": "mutable",
 											"name": "creator",
-											"nameLocation": "208:7:0",
+											"nameLocation": "269:7:0",
 											"nodeType": "VariableDeclaration",
-											"scope": 21,
-											"src": "200:15:0",
+											"scope": 27,
+											"src": "261:15:0",
 											"stateVariable": false,
 											"storageLocation": "default",
 											"typeDescriptions": {
@@ -343,10 +367,10 @@
 												"typeString": "address"
 											},
 											"typeName": {
-												"id": 6,
+												"id": 9,
 												"name": "address",
 												"nodeType": "ElementaryTypeName",
-												"src": "200:7:0",
+												"src": "261:7:0",
 												"stateMutability": "nonpayable",
 												"typeDescriptions": {
 													"typeIdentifier": "t_address",
@@ -357,118 +381,64 @@
 										},
 										{
 											"constant": false,
-											"id": 9,
+											"id": 12,
 											"mutability": "mutable",
 											"name": "balance",
-											"nameLocation": "233:7:0",
+											"nameLocation": "294:7:0",
 											"nodeType": "VariableDeclaration",
-											"scope": 21,
-											"src": "225:15:0",
+											"scope": 27,
+											"src": "286:15:0",
 											"stateVariable": false,
 											"storageLocation": "default",
 											"typeDescriptions": {
 												"typeIdentifier": "t_uint256",
 												"typeString": "uint256"
-											},
-											"typeName": {
-												"id": 8,
-												"name": "uint256",
-												"nodeType": "ElementaryTypeName",
-												"src": "225:7:0",
-												"typeDescriptions": {
-													"typeIdentifier": "t_uint256",
-													"typeString": "uint256"
-												}
-											},
-											"visibility": "internal"
-										},
-										{
-											"constant": false,
-											"id": 12,
-											"mutability": "mutable",
-											"name": "status",
-											"nameLocation": "263:6:0",
-											"nodeType": "VariableDeclaration",
-											"scope": 21,
-											"src": "250:19:0",
-											"stateVariable": false,
-											"storageLocation": "default",
-											"typeDescriptions": {
-												"typeIdentifier": "t_enum$_RaffleStatus_$5",
-												"typeString": "enum IPickr.RaffleStatus"
 											},
 											"typeName": {
 												"id": 11,
+												"name": "uint256",
+												"nodeType": "ElementaryTypeName",
+												"src": "286:7:0",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												}
+											},
+											"visibility": "internal"
+										},
+										{
+											"constant": false,
+											"id": 15,
+											"mutability": "mutable",
+											"name": "status",
+											"nameLocation": "322:6:0",
+											"nodeType": "VariableDeclaration",
+											"scope": 27,
+											"src": "311:17:0",
+											"stateVariable": false,
+											"storageLocation": "default",
+											"typeDescriptions": {
+												"typeIdentifier": "t_enum$_RoomStatus_$5",
+												"typeString": "enum IPickr.RoomStatus"
+											},
+											"typeName": {
+												"id": 14,
 												"nodeType": "UserDefinedTypeName",
 												"pathNode": {
-													"id": 10,
-													"name": "RaffleStatus",
+													"id": 13,
+													"name": "RoomStatus",
 													"nameLocations": [
-														"250:12:0"
+														"311:10:0"
 													],
 													"nodeType": "IdentifierPath",
 													"referencedDeclaration": 5,
-													"src": "250:12:0"
+													"src": "311:10:0"
 												},
 												"referencedDeclaration": 5,
-												"src": "250:12:0",
+												"src": "311:10:0",
 												"typeDescriptions": {
-													"typeIdentifier": "t_enum$_RaffleStatus_$5",
-													"typeString": "enum IPickr.RaffleStatus"
-												}
-											},
-											"visibility": "internal"
-										},
-										{
-											"constant": false,
-											"id": 14,
-											"mutability": "mutable",
-											"name": "maxParticipant",
-											"nameLocation": "287:14:0",
-											"nodeType": "VariableDeclaration",
-											"scope": 21,
-											"src": "279:22:0",
-											"stateVariable": false,
-											"storageLocation": "default",
-											"typeDescriptions": {
-												"typeIdentifier": "t_uint256",
-												"typeString": "uint256"
-											},
-											"typeName": {
-												"id": 13,
-												"name": "uint256",
-												"nodeType": "ElementaryTypeName",
-												"src": "279:7:0",
-												"typeDescriptions": {
-													"typeIdentifier": "t_uint256",
-													"typeString": "uint256"
-												}
-											},
-											"visibility": "internal"
-										},
-										{
-											"constant": false,
-											"id": 16,
-											"mutability": "mutable",
-											"name": "minParticipant",
-											"nameLocation": "319:14:0",
-											"nodeType": "VariableDeclaration",
-											"scope": 21,
-											"src": "311:22:0",
-											"stateVariable": false,
-											"storageLocation": "default",
-											"typeDescriptions": {
-												"typeIdentifier": "t_uint256",
-												"typeString": "uint256"
-											},
-											"typeName": {
-												"id": 15,
-												"name": "uint256",
-												"nodeType": "ElementaryTypeName",
-												"src": "311:7:0",
-												"typeDescriptions": {
-													"typeIdentifier": "t_uint256",
-													"typeString": "uint256"
+													"typeIdentifier": "t_enum$_RoomStatus_$5",
+													"typeString": "enum IPickr.RoomStatus"
 												}
 											},
 											"visibility": "internal"
@@ -477,11 +447,48 @@
 											"constant": false,
 											"id": 18,
 											"mutability": "mutable",
-											"name": "totalParticipant",
-											"nameLocation": "351:16:0",
+											"name": "accessMode",
+											"nameLocation": "353:10:0",
 											"nodeType": "VariableDeclaration",
-											"scope": 21,
-											"src": "343:24:0",
+											"scope": 27,
+											"src": "338:25:0",
+											"stateVariable": false,
+											"storageLocation": "default",
+											"typeDescriptions": {
+												"typeIdentifier": "t_enum$_RoomAccessMode_$8",
+												"typeString": "enum IPickr.RoomAccessMode"
+											},
+											"typeName": {
+												"id": 17,
+												"nodeType": "UserDefinedTypeName",
+												"pathNode": {
+													"id": 16,
+													"name": "RoomAccessMode",
+													"nameLocations": [
+														"338:14:0"
+													],
+													"nodeType": "IdentifierPath",
+													"referencedDeclaration": 8,
+													"src": "338:14:0"
+												},
+												"referencedDeclaration": 8,
+												"src": "338:14:0",
+												"typeDescriptions": {
+													"typeIdentifier": "t_enum$_RoomAccessMode_$8",
+													"typeString": "enum IPickr.RoomAccessMode"
+												}
+											},
+											"visibility": "internal"
+										},
+										{
+											"constant": false,
+											"id": 20,
+											"mutability": "mutable",
+											"name": "maxParticipant",
+											"nameLocation": "381:14:0",
+											"nodeType": "VariableDeclaration",
+											"scope": 27,
+											"src": "373:22:0",
 											"stateVariable": false,
 											"storageLocation": "default",
 											"typeDescriptions": {
@@ -489,10 +496,10 @@
 												"typeString": "uint256"
 											},
 											"typeName": {
-												"id": 17,
+												"id": 19,
 												"name": "uint256",
 												"nodeType": "ElementaryTypeName",
-												"src": "343:7:0",
+												"src": "373:7:0",
 												"typeDescriptions": {
 													"typeIdentifier": "t_uint256",
 													"typeString": "uint256"
@@ -502,13 +509,67 @@
 										},
 										{
 											"constant": false,
-											"id": 20,
+											"id": 22,
+											"mutability": "mutable",
+											"name": "minParticipant",
+											"nameLocation": "413:14:0",
+											"nodeType": "VariableDeclaration",
+											"scope": 27,
+											"src": "405:22:0",
+											"stateVariable": false,
+											"storageLocation": "default",
+											"typeDescriptions": {
+												"typeIdentifier": "t_uint256",
+												"typeString": "uint256"
+											},
+											"typeName": {
+												"id": 21,
+												"name": "uint256",
+												"nodeType": "ElementaryTypeName",
+												"src": "405:7:0",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												}
+											},
+											"visibility": "internal"
+										},
+										{
+											"constant": false,
+											"id": 24,
+											"mutability": "mutable",
+											"name": "totalParticipant",
+											"nameLocation": "445:16:0",
+											"nodeType": "VariableDeclaration",
+											"scope": 27,
+											"src": "437:24:0",
+											"stateVariable": false,
+											"storageLocation": "default",
+											"typeDescriptions": {
+												"typeIdentifier": "t_uint256",
+												"typeString": "uint256"
+											},
+											"typeName": {
+												"id": 23,
+												"name": "uint256",
+												"nodeType": "ElementaryTypeName",
+												"src": "437:7:0",
+												"typeDescriptions": {
+													"typeIdentifier": "t_uint256",
+													"typeString": "uint256"
+												}
+											},
+											"visibility": "internal"
+										},
+										{
+											"constant": false,
+											"id": 26,
 											"mutability": "mutable",
 											"name": "createdAt",
-											"nameLocation": "384:9:0",
+											"nameLocation": "478:9:0",
 											"nodeType": "VariableDeclaration",
-											"scope": 21,
-											"src": "377:16:0",
+											"scope": 27,
+											"src": "471:16:0",
 											"stateVariable": false,
 											"storageLocation": "default",
 											"typeDescriptions": {
@@ -516,10 +577,10 @@
 												"typeString": "uint64"
 											},
 											"typeName": {
-												"id": 19,
+												"id": 25,
 												"name": "uint64",
 												"nodeType": "ElementaryTypeName",
-												"src": "377:6:0",
+												"src": "471:6:0",
 												"typeDescriptions": {
 													"typeIdentifier": "t_uint64",
 													"typeString": "uint64"
@@ -528,32 +589,32 @@
 											"visibility": "internal"
 										}
 									],
-									"name": "Raffle",
-									"nameLocation": "183:6:0",
+									"name": "Room",
+									"nameLocation": "246:4:0",
 									"nodeType": "StructDefinition",
-									"scope": 84,
-									"src": "176:224:0",
+									"scope": 90,
+									"src": "239:255:0",
 									"visibility": "public"
 								},
 								{
 									"errorSelector": "d68affb7",
-									"id": 25,
+									"id": 31,
 									"name": "ErrorNotAuthorized",
-									"nameLocation": "426:18:0",
+									"nameLocation": "520:18:0",
 									"nodeType": "ErrorDefinition",
 									"parameters": {
-										"id": 24,
+										"id": 30,
 										"nodeType": "ParameterList",
 										"parameters": [
 											{
 												"constant": false,
-												"id": 23,
+												"id": 29,
 												"mutability": "mutable",
 												"name": "caller",
-												"nameLocation": "453:6:0",
+												"nameLocation": "547:6:0",
 												"nodeType": "VariableDeclaration",
-												"scope": 25,
-												"src": "445:14:0",
+												"scope": 31,
+												"src": "539:14:0",
 												"stateVariable": false,
 												"storageLocation": "default",
 												"typeDescriptions": {
@@ -561,10 +622,10 @@
 													"typeString": "address"
 												},
 												"typeName": {
-													"id": 22,
+													"id": 28,
 													"name": "address",
 													"nodeType": "ElementaryTypeName",
-													"src": "445:7:0",
+													"src": "539:7:0",
 													"stateMutability": "nonpayable",
 													"typeDescriptions": {
 														"typeIdentifier": "t_address",
@@ -574,71 +635,15 @@
 												"visibility": "internal"
 											}
 										],
-										"src": "444:16:0"
+										"src": "538:16:0"
 									},
-									"src": "420:41:0"
+									"src": "514:41:0"
 								},
 								{
-									"errorSelector": "7aafa104",
-									"id": 29,
-									"name": "ErrorRaffleIsNotExist",
-									"nameLocation": "472:21:0",
-									"nodeType": "ErrorDefinition",
-									"parameters": {
-										"id": 28,
-										"nodeType": "ParameterList",
-										"parameters": [
-											{
-												"constant": false,
-												"id": 27,
-												"mutability": "mutable",
-												"name": "codeHash",
-												"nameLocation": "502:8:0",
-												"nodeType": "VariableDeclaration",
-												"scope": 29,
-												"src": "494:16:0",
-												"stateVariable": false,
-												"storageLocation": "default",
-												"typeDescriptions": {
-													"typeIdentifier": "t_bytes32",
-													"typeString": "bytes32"
-												},
-												"typeName": {
-													"id": 26,
-													"name": "bytes32",
-													"nodeType": "ElementaryTypeName",
-													"src": "494:7:0",
-													"typeDescriptions": {
-														"typeIdentifier": "t_bytes32",
-														"typeString": "bytes32"
-													}
-												},
-												"visibility": "internal"
-											}
-										],
-										"src": "493:18:0"
-									},
-									"src": "466:46:0"
-								},
-								{
-									"errorSelector": "166cbdbe",
-									"id": 31,
-									"name": "ErrorCodeIsRequired",
-									"nameLocation": "523:19:0",
-									"nodeType": "ErrorDefinition",
-									"parameters": {
-										"id": 30,
-										"nodeType": "ParameterList",
-										"parameters": [],
-										"src": "542:2:0"
-									},
-									"src": "517:28:0"
-								},
-								{
-									"errorSelector": "8c664a9d",
+									"errorSelector": "e2863439",
 									"id": 35,
-									"name": "ErrorRaffleIsNotActive",
-									"nameLocation": "556:22:0",
+									"name": "ErrorRoomIsNotExist",
+									"nameLocation": "566:19:0",
 									"nodeType": "ErrorDefinition",
 									"parameters": {
 										"id": 34,
@@ -649,10 +654,10 @@
 												"id": 33,
 												"mutability": "mutable",
 												"name": "codeHash",
-												"nameLocation": "587:8:0",
+												"nameLocation": "594:8:0",
 												"nodeType": "VariableDeclaration",
 												"scope": 35,
-												"src": "579:16:0",
+												"src": "586:16:0",
 												"stateVariable": false,
 												"storageLocation": "default",
 												"typeDescriptions": {
@@ -663,7 +668,7 @@
 													"id": 32,
 													"name": "bytes32",
 													"nodeType": "ElementaryTypeName",
-													"src": "579:7:0",
+													"src": "586:7:0",
 													"typeDescriptions": {
 														"typeIdentifier": "t_bytes32",
 														"typeString": "bytes32"
@@ -672,113 +677,169 @@
 												"visibility": "internal"
 											}
 										],
-										"src": "578:18:0"
+										"src": "585:18:0"
 									},
-									"src": "550:47:0"
+									"src": "560:44:0"
 								},
 								{
-									"errorSelector": "d1dbaf55",
-									"id": 39,
-									"name": "ErrorRaffleIsNotStarted",
-									"nameLocation": "608:23:0",
+									"errorSelector": "166cbdbe",
+									"id": 37,
+									"name": "ErrorCodeIsRequired",
+									"nameLocation": "615:19:0",
 									"nodeType": "ErrorDefinition",
 									"parameters": {
-										"id": 38,
+										"id": 36,
 										"nodeType": "ParameterList",
-										"parameters": [
-											{
-												"constant": false,
-												"id": 37,
-												"mutability": "mutable",
-												"name": "codeHash",
-												"nameLocation": "640:8:0",
-												"nodeType": "VariableDeclaration",
-												"scope": 39,
-												"src": "632:16:0",
-												"stateVariable": false,
-												"storageLocation": "default",
-												"typeDescriptions": {
-													"typeIdentifier": "t_bytes32",
-													"typeString": "bytes32"
-												},
-												"typeName": {
-													"id": 36,
-													"name": "bytes32",
-													"nodeType": "ElementaryTypeName",
-													"src": "632:7:0",
-													"typeDescriptions": {
-														"typeIdentifier": "t_bytes32",
-														"typeString": "bytes32"
-													}
-												},
-												"visibility": "internal"
-											}
-										],
-										"src": "631:18:0"
+										"parameters": [],
+										"src": "634:2:0"
 									},
-									"src": "602:48:0"
+									"src": "609:28:0"
 								},
 								{
-									"errorSelector": "600f7bf4",
+									"errorSelector": "d528e2af",
 									"id": 41,
-									"name": "ErrorDepositRequired",
-									"nameLocation": "690:20:0",
+									"name": "ErrorRoomIsNotActive",
+									"nameLocation": "648:20:0",
 									"nodeType": "ErrorDefinition",
 									"parameters": {
 										"id": 40,
 										"nodeType": "ParameterList",
-										"parameters": [],
-										"src": "710:2:0"
+										"parameters": [
+											{
+												"constant": false,
+												"id": 39,
+												"mutability": "mutable",
+												"name": "codeHash",
+												"nameLocation": "677:8:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 41,
+												"src": "669:16:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_bytes32",
+													"typeString": "bytes32"
+												},
+												"typeName": {
+													"id": 38,
+													"name": "bytes32",
+													"nodeType": "ElementaryTypeName",
+													"src": "669:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_bytes32",
+														"typeString": "bytes32"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "668:18:0"
 									},
-									"src": "684:29:0"
+									"src": "642:45:0"
 								},
 								{
-									"errorSelector": "b3b6029c",
-									"id": 43,
-									"name": "ErrorMaxParticipantLessThanMin",
-									"nameLocation": "724:30:0",
-									"nodeType": "ErrorDefinition",
-									"parameters": {
-										"id": 42,
-										"nodeType": "ParameterList",
-										"parameters": [],
-										"src": "754:2:0"
-									},
-									"src": "718:39:0"
-								},
-								{
-									"errorSelector": "530a9867",
+									"errorSelector": "d750f8d9",
 									"id": 45,
-									"name": "ErrorMinParticipantMustBeGreaterThanZero",
-									"nameLocation": "768:40:0",
+									"name": "ErrorRoomIsNotStarted",
+									"nameLocation": "698:21:0",
 									"nodeType": "ErrorDefinition",
 									"parameters": {
 										"id": 44,
 										"nodeType": "ParameterList",
-										"parameters": [],
-										"src": "808:2:0"
+										"parameters": [
+											{
+												"constant": false,
+												"id": 43,
+												"mutability": "mutable",
+												"name": "codeHash",
+												"nameLocation": "728:8:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 45,
+												"src": "720:16:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_bytes32",
+													"typeString": "bytes32"
+												},
+												"typeName": {
+													"id": 42,
+													"name": "bytes32",
+													"nodeType": "ElementaryTypeName",
+													"src": "720:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_bytes32",
+														"typeString": "bytes32"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "719:18:0"
 									},
-									"src": "762:49:0"
+									"src": "692:46:0"
 								},
 								{
-									"errorSelector": "4fec90c5",
+									"errorSelector": "600f7bf4",
+									"id": 47,
+									"name": "ErrorDepositRequired",
+									"nameLocation": "776:20:0",
+									"nodeType": "ErrorDefinition",
+									"parameters": {
+										"id": 46,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "796:2:0"
+									},
+									"src": "770:29:0"
+								},
+								{
+									"errorSelector": "b3b6029c",
 									"id": 49,
-									"name": "ErrorCodeAlreadyUsed",
-									"nameLocation": "822:20:0",
+									"name": "ErrorMaxParticipantLessThanMin",
+									"nameLocation": "810:30:0",
 									"nodeType": "ErrorDefinition",
 									"parameters": {
 										"id": 48,
 										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "840:2:0"
+									},
+									"src": "804:39:0"
+								},
+								{
+									"errorSelector": "530a9867",
+									"id": 51,
+									"name": "ErrorMinParticipantMustBeGreaterThanZero",
+									"nameLocation": "854:40:0",
+									"nodeType": "ErrorDefinition",
+									"parameters": {
+										"id": 50,
+										"nodeType": "ParameterList",
+										"parameters": [],
+										"src": "894:2:0"
+									},
+									"src": "848:49:0"
+								},
+								{
+									"errorSelector": "4fec90c5",
+									"id": 55,
+									"name": "ErrorCodeAlreadyUsed",
+									"nameLocation": "908:20:0",
+									"nodeType": "ErrorDefinition",
+									"parameters": {
+										"id": 54,
+										"nodeType": "ParameterList",
 										"parameters": [
 											{
 												"constant": false,
-												"id": 47,
+												"id": 53,
 												"mutability": "mutable",
 												"name": "codeHash",
-												"nameLocation": "851:8:0",
+												"nameLocation": "937:8:0",
 												"nodeType": "VariableDeclaration",
-												"scope": 49,
-												"src": "843:16:0",
+												"scope": 55,
+												"src": "929:16:0",
 												"stateVariable": false,
 												"storageLocation": "default",
 												"typeDescriptions": {
@@ -786,10 +847,10 @@
 													"typeString": "bytes32"
 												},
 												"typeName": {
-													"id": 46,
+													"id": 52,
 													"name": "bytes32",
 													"nodeType": "ElementaryTypeName",
-													"src": "843:7:0",
+													"src": "929:7:0",
 													"typeDescriptions": {
 														"typeIdentifier": "t_bytes32",
 														"typeString": "bytes32"
@@ -798,29 +859,29 @@
 												"visibility": "internal"
 											}
 										],
-										"src": "842:18:0"
+										"src": "928:18:0"
 									},
-									"src": "816:45:0"
+									"src": "902:45:0"
 								},
 								{
 									"errorSelector": "2cf3c5c7",
-									"id": 53,
+									"id": 59,
 									"name": "ErrorNotEnoughParticipant",
-									"nameLocation": "900:25:0",
+									"nameLocation": "984:25:0",
 									"nodeType": "ErrorDefinition",
 									"parameters": {
-										"id": 52,
+										"id": 58,
 										"nodeType": "ParameterList",
 										"parameters": [
 											{
 												"constant": false,
-												"id": 51,
+												"id": 57,
 												"mutability": "mutable",
 												"name": "codeHash",
-												"nameLocation": "934:8:0",
+												"nameLocation": "1018:8:0",
 												"nodeType": "VariableDeclaration",
-												"scope": 53,
-												"src": "926:16:0",
+												"scope": 59,
+												"src": "1010:16:0",
 												"stateVariable": false,
 												"storageLocation": "default",
 												"typeDescriptions": {
@@ -828,10 +889,10 @@
 													"typeString": "bytes32"
 												},
 												"typeName": {
-													"id": 50,
+													"id": 56,
 													"name": "bytes32",
 													"nodeType": "ElementaryTypeName",
-													"src": "926:7:0",
+													"src": "1010:7:0",
 													"typeDescriptions": {
 														"typeIdentifier": "t_bytes32",
 														"typeString": "bytes32"
@@ -840,57 +901,15 @@
 												"visibility": "internal"
 											}
 										],
-										"src": "925:18:0"
+										"src": "1009:18:0"
 									},
-									"src": "894:50:0"
+									"src": "978:50:0"
 								},
 								{
 									"errorSelector": "fe23ea1f",
-									"id": 57,
-									"name": "ErrorInvalidWinner",
-									"nameLocation": "986:18:0",
-									"nodeType": "ErrorDefinition",
-									"parameters": {
-										"id": 56,
-										"nodeType": "ParameterList",
-										"parameters": [
-											{
-												"constant": false,
-												"id": 55,
-												"mutability": "mutable",
-												"name": "codeHash",
-												"nameLocation": "1013:8:0",
-												"nodeType": "VariableDeclaration",
-												"scope": 57,
-												"src": "1005:16:0",
-												"stateVariable": false,
-												"storageLocation": "default",
-												"typeDescriptions": {
-													"typeIdentifier": "t_bytes32",
-													"typeString": "bytes32"
-												},
-												"typeName": {
-													"id": 54,
-													"name": "bytes32",
-													"nodeType": "ElementaryTypeName",
-													"src": "1005:7:0",
-													"typeDescriptions": {
-														"typeIdentifier": "t_bytes32",
-														"typeString": "bytes32"
-													}
-												},
-												"visibility": "internal"
-											}
-										],
-										"src": "1004:18:0"
-									},
-									"src": "980:43:0"
-								},
-								{
-									"errorSelector": "e66163eb",
 									"id": 63,
-									"name": "ErrorAddressIsNotParticipant",
-									"nameLocation": "1034:28:0",
+									"name": "ErrorInvalidWinner",
+									"nameLocation": "1070:18:0",
 									"nodeType": "ErrorDefinition",
 									"parameters": {
 										"id": 62,
@@ -898,13 +917,13 @@
 										"parameters": [
 											{
 												"constant": false,
-												"id": 59,
+												"id": 61,
 												"mutability": "mutable",
 												"name": "codeHash",
-												"nameLocation": "1071:8:0",
+												"nameLocation": "1097:8:0",
 												"nodeType": "VariableDeclaration",
 												"scope": 63,
-												"src": "1063:16:0",
+												"src": "1089:16:0",
 												"stateVariable": false,
 												"storageLocation": "default",
 												"typeDescriptions": {
@@ -912,58 +931,30 @@
 													"typeString": "bytes32"
 												},
 												"typeName": {
-													"id": 58,
+													"id": 60,
 													"name": "bytes32",
 													"nodeType": "ElementaryTypeName",
-													"src": "1063:7:0",
+													"src": "1089:7:0",
 													"typeDescriptions": {
 														"typeIdentifier": "t_bytes32",
 														"typeString": "bytes32"
 													}
 												},
 												"visibility": "internal"
-											},
-											{
-												"constant": false,
-												"id": 61,
-												"mutability": "mutable",
-												"name": "addr",
-												"nameLocation": "1089:4:0",
-												"nodeType": "VariableDeclaration",
-												"scope": 63,
-												"src": "1081:12:0",
-												"stateVariable": false,
-												"storageLocation": "default",
-												"typeDescriptions": {
-													"typeIdentifier": "t_address",
-													"typeString": "address"
-												},
-												"typeName": {
-													"id": 60,
-													"name": "address",
-													"nodeType": "ElementaryTypeName",
-													"src": "1081:7:0",
-													"stateMutability": "nonpayable",
-													"typeDescriptions": {
-														"typeIdentifier": "t_address",
-														"typeString": "address"
-													}
-												},
-												"visibility": "internal"
 											}
 										],
-										"src": "1062:32:0"
+										"src": "1088:18:0"
 									},
-									"src": "1028:67:0"
+									"src": "1064:43:0"
 								},
 								{
-									"errorSelector": "938bdcb3",
-									"id": 67,
-									"name": "ErrorNoBalance",
-									"nameLocation": "1106:14:0",
+									"errorSelector": "e66163eb",
+									"id": 69,
+									"name": "ErrorAddressIsNotParticipant",
+									"nameLocation": "1118:28:0",
 									"nodeType": "ErrorDefinition",
 									"parameters": {
-										"id": 66,
+										"id": 68,
 										"nodeType": "ParameterList",
 										"parameters": [
 											{
@@ -971,10 +962,10 @@
 												"id": 65,
 												"mutability": "mutable",
 												"name": "codeHash",
-												"nameLocation": "1129:8:0",
+												"nameLocation": "1155:8:0",
 												"nodeType": "VariableDeclaration",
-												"scope": 67,
-												"src": "1121:16:0",
+												"scope": 69,
+												"src": "1147:16:0",
 												"stateVariable": false,
 												"storageLocation": "default",
 												"typeDescriptions": {
@@ -985,38 +976,66 @@
 													"id": 64,
 													"name": "bytes32",
 													"nodeType": "ElementaryTypeName",
-													"src": "1121:7:0",
+													"src": "1147:7:0",
 													"typeDescriptions": {
 														"typeIdentifier": "t_bytes32",
 														"typeString": "bytes32"
 													}
 												},
 												"visibility": "internal"
+											},
+											{
+												"constant": false,
+												"id": 67,
+												"mutability": "mutable",
+												"name": "addr",
+												"nameLocation": "1173:4:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 69,
+												"src": "1165:12:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_address",
+													"typeString": "address"
+												},
+												"typeName": {
+													"id": 66,
+													"name": "address",
+													"nodeType": "ElementaryTypeName",
+													"src": "1165:7:0",
+													"stateMutability": "nonpayable",
+													"typeDescriptions": {
+														"typeIdentifier": "t_address",
+														"typeString": "address"
+													}
+												},
+												"visibility": "internal"
 											}
 										],
-										"src": "1120:18:0"
+										"src": "1146:32:0"
 									},
-									"src": "1100:39:0"
+									"src": "1112:67:0"
 								},
 								{
-									"errorSelector": "2517ca95",
-									"id": 71,
-									"name": "ErrorUserIsTheRaffleOwner",
-									"nameLocation": "1177:25:0",
+									"errorSelector": "938bdcb3",
+									"id": 73,
+									"name": "ErrorNoBalance",
+									"nameLocation": "1190:14:0",
 									"nodeType": "ErrorDefinition",
 									"parameters": {
-										"id": 70,
+										"id": 72,
 										"nodeType": "ParameterList",
 										"parameters": [
 											{
 												"constant": false,
-												"id": 69,
+												"id": 71,
 												"mutability": "mutable",
 												"name": "codeHash",
-												"nameLocation": "1211:8:0",
+												"nameLocation": "1213:8:0",
 												"nodeType": "VariableDeclaration",
-												"scope": 71,
-												"src": "1203:16:0",
+												"scope": 73,
+												"src": "1205:16:0",
 												"stateVariable": false,
 												"storageLocation": "default",
 												"typeDescriptions": {
@@ -1024,10 +1043,10 @@
 													"typeString": "bytes32"
 												},
 												"typeName": {
-													"id": 68,
+													"id": 70,
 													"name": "bytes32",
 													"nodeType": "ElementaryTypeName",
-													"src": "1203:7:0",
+													"src": "1205:7:0",
 													"typeDescriptions": {
 														"typeIdentifier": "t_bytes32",
 														"typeString": "bytes32"
@@ -1036,29 +1055,29 @@
 												"visibility": "internal"
 											}
 										],
-										"src": "1202:18:0"
+										"src": "1204:18:0"
 									},
-									"src": "1171:50:0"
+									"src": "1184:39:0"
 								},
 								{
-									"errorSelector": "37d57d56",
-									"id": 75,
-									"name": "ErrorRaffleIsFull",
-									"nameLocation": "1232:17:0",
+									"errorSelector": "c55d8c82",
+									"id": 77,
+									"name": "ErrorUserIsTheRoomOwner",
+									"nameLocation": "1259:23:0",
 									"nodeType": "ErrorDefinition",
 									"parameters": {
-										"id": 74,
+										"id": 76,
 										"nodeType": "ParameterList",
 										"parameters": [
 											{
 												"constant": false,
-												"id": 73,
+												"id": 75,
 												"mutability": "mutable",
 												"name": "codeHash",
-												"nameLocation": "1258:8:0",
+												"nameLocation": "1291:8:0",
 												"nodeType": "VariableDeclaration",
-												"scope": 75,
-												"src": "1250:16:0",
+												"scope": 77,
+												"src": "1283:16:0",
 												"stateVariable": false,
 												"storageLocation": "default",
 												"typeDescriptions": {
@@ -1066,10 +1085,10 @@
 													"typeString": "bytes32"
 												},
 												"typeName": {
-													"id": 72,
+													"id": 74,
 													"name": "bytes32",
 													"nodeType": "ElementaryTypeName",
-													"src": "1250:7:0",
+													"src": "1283:7:0",
 													"typeDescriptions": {
 														"typeIdentifier": "t_bytes32",
 														"typeString": "bytes32"
@@ -1078,29 +1097,29 @@
 												"visibility": "internal"
 											}
 										],
-										"src": "1249:18:0"
+										"src": "1282:18:0"
 									},
-									"src": "1226:42:0"
+									"src": "1253:48:0"
 								},
 								{
-									"errorSelector": "a3439354",
-									"id": 79,
-									"name": "ErrorUserAlreadyJoinRaffle",
-									"nameLocation": "1279:26:0",
+									"errorSelector": "495000c0",
+									"id": 81,
+									"name": "ErrorRoomIsFull",
+									"nameLocation": "1312:15:0",
 									"nodeType": "ErrorDefinition",
 									"parameters": {
-										"id": 78,
+										"id": 80,
 										"nodeType": "ParameterList",
 										"parameters": [
 											{
 												"constant": false,
-												"id": 77,
+												"id": 79,
 												"mutability": "mutable",
 												"name": "codeHash",
-												"nameLocation": "1314:8:0",
+												"nameLocation": "1336:8:0",
 												"nodeType": "VariableDeclaration",
-												"scope": 79,
-												"src": "1306:16:0",
+												"scope": 81,
+												"src": "1328:16:0",
 												"stateVariable": false,
 												"storageLocation": "default",
 												"typeDescriptions": {
@@ -1108,10 +1127,10 @@
 													"typeString": "bytes32"
 												},
 												"typeName": {
-													"id": 76,
+													"id": 78,
 													"name": "bytes32",
 													"nodeType": "ElementaryTypeName",
-													"src": "1306:7:0",
+													"src": "1328:7:0",
 													"typeDescriptions": {
 														"typeIdentifier": "t_bytes32",
 														"typeString": "bytes32"
@@ -1120,29 +1139,71 @@
 												"visibility": "internal"
 											}
 										],
-										"src": "1305:18:0"
+										"src": "1327:18:0"
 									},
-									"src": "1273:51:0"
+									"src": "1306:40:0"
+								},
+								{
+									"errorSelector": "02cbc175",
+									"id": 85,
+									"name": "ErrorUserAlreadyJoinRoom",
+									"nameLocation": "1357:24:0",
+									"nodeType": "ErrorDefinition",
+									"parameters": {
+										"id": 84,
+										"nodeType": "ParameterList",
+										"parameters": [
+											{
+												"constant": false,
+												"id": 83,
+												"mutability": "mutable",
+												"name": "codeHash",
+												"nameLocation": "1390:8:0",
+												"nodeType": "VariableDeclaration",
+												"scope": 85,
+												"src": "1382:16:0",
+												"stateVariable": false,
+												"storageLocation": "default",
+												"typeDescriptions": {
+													"typeIdentifier": "t_bytes32",
+													"typeString": "bytes32"
+												},
+												"typeName": {
+													"id": 82,
+													"name": "bytes32",
+													"nodeType": "ElementaryTypeName",
+													"src": "1382:7:0",
+													"typeDescriptions": {
+														"typeIdentifier": "t_bytes32",
+														"typeString": "bytes32"
+													}
+												},
+												"visibility": "internal"
+											}
+										],
+										"src": "1381:18:0"
+									},
+									"src": "1351:49:0"
 								},
 								{
 									"errorSelector": "0d7648af",
-									"id": 83,
+									"id": 89,
 									"name": "ErrorUserIsNotParticipant",
-									"nameLocation": "1363:25:0",
+									"nameLocation": "1437:25:0",
 									"nodeType": "ErrorDefinition",
 									"parameters": {
-										"id": 82,
+										"id": 88,
 										"nodeType": "ParameterList",
 										"parameters": [
 											{
 												"constant": false,
-												"id": 81,
+												"id": 87,
 												"mutability": "mutable",
 												"name": "codeHash",
-												"nameLocation": "1397:8:0",
+												"nameLocation": "1471:8:0",
 												"nodeType": "VariableDeclaration",
-												"scope": 83,
-												"src": "1389:16:0",
+												"scope": 89,
+												"src": "1463:16:0",
 												"stateVariable": false,
 												"storageLocation": "default",
 												"typeDescriptions": {
@@ -1150,10 +1211,10 @@
 													"typeString": "bytes32"
 												},
 												"typeName": {
-													"id": 80,
+													"id": 86,
 													"name": "bytes32",
 													"nodeType": "ElementaryTypeName",
-													"src": "1389:7:0",
+													"src": "1463:7:0",
 													"typeDescriptions": {
 														"typeIdentifier": "t_bytes32",
 														"typeString": "bytes32"
@@ -1162,36 +1223,36 @@
 												"visibility": "internal"
 											}
 										],
-										"src": "1388:18:0"
+										"src": "1462:18:0"
 									},
-									"src": "1357:50:0"
+									"src": "1431:50:0"
 								}
 							],
-							"scope": 85,
-							"src": "58:1351:0",
+							"scope": 91,
+							"src": "58:1425:0",
 							"usedErrors": [
-								25,
-								29,
 								31,
 								35,
-								39,
+								37,
 								41,
-								43,
 								45,
+								47,
 								49,
-								53,
-								57,
+								51,
+								55,
+								59,
 								63,
-								67,
-								71,
-								75,
-								79,
-								83
+								69,
+								73,
+								77,
+								81,
+								85,
+								89
 							],
 							"usedEvents": []
 						}
 					],
-					"src": "32:1378:0"
+					"src": "32:1452:0"
 				},
 				"id": 0
 			}

@@ -37,10 +37,10 @@ contract Pickr is IPickr {
         if (maxParticipant < minParticipant) {
             revert ErrorMaxParticipantLessThanMin();
         }
-        if (minParticipant < 0) {
+        if (minParticipant == 0) {
             revert ErrorMinParticipantMustBeGreaterThanZero();
         }
-        if (codeHash.length < 0) revert ErrorCodeIsRequired();
+        if (codeHash == bytes32(0)) revert ErrorCodeIsRequired();
         if (_isRoomExist(codeHash)) {
             revert ErrorCodeAlreadyUsed(codeHash);
         }
@@ -49,6 +49,7 @@ contract Pickr is IPickr {
             msg.sender,
             msg.value,
             RoomStatus.ACTIVE,
+            RoomAccessMode.PRIVATE,
             maxParticipant,
             minParticipant,
             0,
