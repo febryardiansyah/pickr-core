@@ -22,15 +22,14 @@ contract Pickr is IPickr {
 
     mapping(bytes32 codeHash => Room) public rooms;
     mapping(bytes32 codeHash => mapping(address => bool)) private hasJoined;
-    mapping(bytes32 codeHash => address[]) private participants;
+    mapping(bytes32 codeHash => address[]) public participants;
     mapping(bytes32 codeHash => address) public winners;
-    mapping(address user => bytes32[]) private roomCodesByCreator;
 
     // main functions
     function createRoom(
+        bytes32 codeHash,
         uint256 minParticipant,
-        uint256 maxParticipant,
-        bytes32 codeHash
+        uint256 maxParticipant
     ) external payable {
         if (msg.value == 0) revert ErrorDepositRequired();
 
@@ -53,10 +52,11 @@ contract Pickr is IPickr {
             maxParticipant,
             minParticipant,
             0,
+            1,
             uint64(block.timestamp)
         );
 
-        roomCodesByCreator[msg.sender].push(codeHash);
+        emit RoomCreated(codeHash, msg.sender);
     }
 
     function deposit(bytes32 codeHash) external payable onlyCreator(codeHash) {
@@ -70,6 +70,8 @@ contract Pickr is IPickr {
         if (msg.value == 0) revert ErrorDepositRequired();
 
         room.balance += msg.value;
+
+        emit RoomDeposited(codeHash, msg.value);
     }
 
     function startRoom(bytes32 codeHash) external onlyCreator(codeHash) {
@@ -78,11 +80,13 @@ contract Pickr is IPickr {
             revert ErrorRoomIsNotActive(codeHash);
         }
 
-        if (room.totalParticipant <= room.minParticipant) {
+        if (room.totalParticipant < room.minParticipant) {
             revert ErrorNotEnoughParticipant(codeHash);
         }
 
         room.status = RoomStatus.STARTED;
+
+        emit RoomStarted(codeHash);
     }
 
     function winnerSelected(
@@ -107,12 +111,8 @@ contract Pickr is IPickr {
 
         (bool ok, ) = payable(winner).call{value: prize}("");
         require(ok, "Winner payout failure");
-    }
 
-    function roomParticipants(
-        bytes32 codeHash
-    ) external view returns (address[] memory) {
-        return participants[codeHash];
+        emit WinnerSelected(codeHash, winner, prize);
     }
 
     function joinRoom(bytes32 codeHash) external {
@@ -183,23 +183,6 @@ contract Pickr is IPickr {
 
     function _isRoomExist(bytes32 codeHash) private view returns (bool) {
         return rooms[codeHash].creator != address(0);
-    }
-
-    function getUserRoomCodes(
-        address creator
-    ) external view returns (bytes32[] memory) {
-        return roomCodesByCreator[creator];
-    }
-
-    function getUserRooms(
-        address creator
-    ) external view returns (Room[] memory, bytes32[] memory) {
-        bytes32[] memory codes = roomCodesByCreator[creator];
-        Room[] memory list = new Room[](codes.length);
-        for (uint256 i = 0; i < codes.length; i++) {
-            list[i] = rooms[codes[i]];
-        }
-        return (list, codes);
     }
 
     receive() external payable {

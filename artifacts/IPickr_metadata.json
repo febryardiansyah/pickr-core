@@ -1,6 +1,6 @@
 {
 	"compiler": {
-		"version": "0.8.20+commit.a1b79de6"
+		"version": "0.8.30+commit.73712a01"
 	},
 	"language": "Solidity",
 	"output": {
@@ -172,6 +172,82 @@
 				],
 				"name": "ErrorUserIsTheRoomOwner",
 				"type": "error"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "bytes32",
+						"name": "codeHash",
+						"type": "bytes32"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "creator",
+						"type": "address"
+					}
+				],
+				"name": "RoomCreated",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "bytes32",
+						"name": "codeHash",
+						"type": "bytes32"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "balance",
+						"type": "uint256"
+					}
+				],
+				"name": "RoomDeposited",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "bytes32",
+						"name": "codeHash",
+						"type": "bytes32"
+					}
+				],
+				"name": "RoomStarted",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "bytes32",
+						"name": "codeHash",
+						"type": "bytes32"
+					},
+					{
+						"indexed": false,
+						"internalType": "address",
+						"name": "winner",
+						"type": "address"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "prize",
+						"type": "uint256"
+					}
+				],
+				"name": "WinnerSelected",
+				"type": "event"
 			}
 		],
 		"devdoc": {
@@ -187,9 +263,9 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/interfaces/IPickr.sol": "IPickr"
+			"contracts/IPickr.sol": "IPickr"
 		},
-		"evmVersion": "shanghai",
+		"evmVersion": "prague",
 		"libraries": {},
 		"metadata": {
 			"bytecodeHash": "ipfs"
@@ -201,12 +277,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"contracts/interfaces/IPickr.sol": {
-			"keccak256": "0xb4bd6bb53db8f66fe3b6715c18784afeeef2109811332b4a61c0dcc28738b125",
+		"contracts/IPickr.sol": {
+			"keccak256": "0xc2470938b3371136c458c8466f629fc2f3268e0c6512fc409129cbd6675571c5",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://ea3140fc43ac06ba723b57d29831ac6b358700c6fd5455261f04966804841263",
-				"dweb:/ipfs/QmSMCMfZXxeMHuaGMscLaFotxMgBNJvAJyvdEAf8HqUDih"
+				"bzz-raw://b50e45bf4510a08b8540223fee7bb59c88858740e881b1fd8f15a62b41f0ce83",
+				"dweb:/ipfs/QmR6XVo9FQpwFXEmXS3WBKNGPGiNhRvcS6ygM7rGXwXj8o"
 			]
 		}
 	},

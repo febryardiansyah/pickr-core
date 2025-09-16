@@ -218,6 +218,82 @@
 			],
 			"name": "ErrorUserIsTheRoomOwner",
 			"type": "error"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": false,
+					"internalType": "bytes32",
+					"name": "codeHash",
+					"type": "bytes32"
+				},
+				{
+					"indexed": false,
+					"internalType": "address",
+					"name": "creator",
+					"type": "address"
+				}
+			],
+			"name": "RoomCreated",
+			"type": "event"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": false,
+					"internalType": "bytes32",
+					"name": "codeHash",
+					"type": "bytes32"
+				},
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "balance",
+					"type": "uint256"
+				}
+			],
+			"name": "RoomDeposited",
+			"type": "event"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": false,
+					"internalType": "bytes32",
+					"name": "codeHash",
+					"type": "bytes32"
+				}
+			],
+			"name": "RoomStarted",
+			"type": "event"
+		},
+		{
+			"anonymous": false,
+			"inputs": [
+				{
+					"indexed": false,
+					"internalType": "bytes32",
+					"name": "codeHash",
+					"type": "bytes32"
+				},
+				{
+					"indexed": false,
+					"internalType": "address",
+					"name": "winner",
+					"type": "address"
+				},
+				{
+					"indexed": false,
+					"internalType": "uint256",
+					"name": "prize",
+					"type": "uint256"
+				}
+			],
+			"name": "WinnerSelected",
+			"type": "event"
 		}
 	]
 }
