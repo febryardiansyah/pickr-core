@@ -33,30 +33,30 @@ interface IPickr {
 
     // errors
     error ErrorNotAuthorized(address caller);
-    error ErrorRoomIsNotExist(bytes32 codeHash);
+    error ErrorRoomIsNotExist(bytes32 docIdHash);
     error ErrorCodeIsRequired();
-    error ErrorRoomIsNotActive(bytes32 codeHash);
-    error ErrorRoomIsNotStarted(bytes32 codeHash);
+    error ErrorRoomIsNotActive(bytes32 docIdHash);
+    error ErrorRoomIsNotStarted(bytes32 docIdHash);
 
     // create room errors
     error ErrorDepositRequired();
     error ErrorMaxParticipantLessThanMin();
     error ErrorMinParticipantMustBeGreaterThanZero();
-    error ErrorCodeAlreadyUsed(bytes32 codeHash);
+    error ErrorCodeAlreadyUsed(bytes32 docIdHash);
 
     // start room errors
-    error ErrorNotEnoughParticipant(bytes32 codeHash);
+    error ErrorNotEnoughParticipant(bytes32 docIdHash);
 
     // winner selected errors
-    error ErrorInvalidWinner(bytes32 codeHash);
-    error ErrorAddressIsNotParticipant(bytes32 codeHash, address addr);
-    error ErrorNoBalance(bytes32 codeHash);
+    error ErrorInvalidWinner(bytes32 docIdHash);
+    error ErrorAddressIsNotParticipant(bytes32 docIdHash, address addr);
+    error ErrorNoBalance(bytes32 docIdHash);
 
     // join room errors
-    error ErrorUserIsTheRoomOwner(bytes32 codeHash);
-    error ErrorRoomIsFull(bytes32 codeHash);
-    error ErrorUserAlreadyJoinRoom(bytes32 codeHash);
+    error ErrorUserIsTheRoomOwner(bytes32 docIdHash);
+    error ErrorRoomIsFull(bytes32 docIdHash);
+    error ErrorUserAlreadyJoinRoom(bytes32 docIdHash);
 
     // leave room errors
-    error ErrorUserIsNotParticipant(bytes32 codeHash);
+    error ErrorUserIsNotParticipant(bytes32 docIdHash);
 }

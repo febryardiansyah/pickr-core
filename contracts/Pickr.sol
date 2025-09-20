@@ -8,11 +8,11 @@ contract Pickr is IPickr {
         owner = msg.sender;
     }
 
-    modifier onlyCreator(bytes32 codeHash) {
-        if (!_isRoomExist(codeHash)) {
-            revert ErrorRoomIsNotExist(codeHash);
+    modifier onlyCreator(bytes32 docIdHash) {
+        if (!_isRoomExist(docIdHash)) {
+            revert ErrorRoomIsNotExist(docIdHash);
         }
-        if (msg.sender != rooms[codeHash].creator) {
+        if (msg.sender != rooms[docIdHash].creator) {
             revert ErrorNotAuthorized(msg.sender);
         }
         _;
@@ -20,16 +20,18 @@ contract Pickr is IPickr {
 
     address public immutable owner;
 
-    mapping(bytes32 codeHash => Room) public rooms;
-    mapping(bytes32 codeHash => mapping(address => bool)) private hasJoined;
-    mapping(bytes32 codeHash => address[]) public participants;
-    mapping(bytes32 codeHash => address) public winners;
+    mapping(bytes32 docIdHash => Room) public rooms;
+    mapping(bytes32 docIdHash => mapping(address => bool)) private hasJoined;
+    mapping(bytes32 docIdHash => address[]) private participants;
+    mapping(bytes32 docIdHash => address) public winners;
+    mapping(address user => bytes32[]) private roomCodesByCreator;
 
     // main functions
     function createRoom(
         bytes32 codeHash,
         uint256 minParticipant,
-        uint256 maxParticipant
+        uint256 maxParticipant,
+        bytes32 docIdHash
     ) external payable {
         if (msg.value == 0) revert ErrorDepositRequired();
 
@@ -39,12 +41,12 @@ contract Pickr is IPickr {
         if (minParticipant == 0) {
             revert ErrorMinParticipantMustBeGreaterThanZero();
         }
-        if (codeHash == bytes32(0)) revert ErrorCodeIsRequired();
-        if (_isRoomExist(codeHash)) {
-            revert ErrorCodeAlreadyUsed(codeHash);
+        if (docIdHash == bytes32(0)) revert ErrorCodeIsRequired();
+        if (_isRoomExist(docIdHash)) {
+            revert ErrorCodeAlreadyUsed(docIdHash);
         }
 
-        rooms[codeHash] = Room(
+        rooms[docIdHash] = Room(
             msg.sender,
             msg.value,
             RoomStatus.ACTIVE,
@@ -56,119 +58,127 @@ contract Pickr is IPickr {
             uint64(block.timestamp)
         );
 
-        emit RoomCreated(codeHash, msg.sender);
+        roomCodesByCreator[msg.sender].push(docIdHash);
     }
 
-    function deposit(bytes32 codeHash) external payable onlyCreator(codeHash) {
-        if (!_isRoomExist(codeHash)) revert ErrorRoomIsNotExist(codeHash);
+    function deposit(
+        bytes32 docIdHash
+    ) external payable onlyCreator(docIdHash) {
+        if (!_isRoomExist(docIdHash)) revert ErrorRoomIsNotExist(docIdHash);
 
-        Room storage room = rooms[codeHash];
+        Room storage room = rooms[docIdHash];
         if (room.status != RoomStatus.ACTIVE) {
-            revert ErrorRoomIsNotActive(codeHash);
+            revert ErrorRoomIsNotActive(docIdHash);
         }
 
         if (msg.value == 0) revert ErrorDepositRequired();
 
         room.balance += msg.value;
 
-        emit RoomDeposited(codeHash, msg.value);
+        emit RoomDeposited(docIdHash, msg.value);
     }
 
-    function startRoom(bytes32 codeHash) external onlyCreator(codeHash) {
-        Room storage room = rooms[codeHash];
+    function startRoom(bytes32 docIdHash) external onlyCreator(docIdHash) {
+        Room storage room = rooms[docIdHash];
         if (room.status != RoomStatus.ACTIVE) {
-            revert ErrorRoomIsNotActive(codeHash);
+            revert ErrorRoomIsNotActive(docIdHash);
         }
 
-        if (room.totalParticipant < room.minParticipant) {
-            revert ErrorNotEnoughParticipant(codeHash);
+        if (room.totalParticipant <= room.minParticipant) {
+            revert ErrorNotEnoughParticipant(docIdHash);
         }
 
         room.status = RoomStatus.STARTED;
 
-        emit RoomStarted(codeHash);
+        emit RoomStarted(docIdHash);
     }
 
     function winnerSelected(
-        bytes32 codeHash,
+        bytes32 docIdHash,
         address winner
-    ) external onlyCreator(codeHash) {
-        Room storage room = rooms[codeHash];
+    ) external onlyCreator(docIdHash) {
+        Room storage room = rooms[docIdHash];
         if (room.status != RoomStatus.STARTED) {
-            revert ErrorRoomIsNotStarted(codeHash);
+            revert ErrorRoomIsNotStarted(docIdHash);
         }
-        if (winner == address(0)) revert ErrorInvalidWinner(codeHash);
-        if (!hasJoined[codeHash][winner]) {
-            revert ErrorAddressIsNotParticipant(codeHash, winner);
+        if (winner == address(0)) revert ErrorInvalidWinner(docIdHash);
+        if (!hasJoined[docIdHash][winner]) {
+            revert ErrorAddressIsNotParticipant(docIdHash, winner);
         }
 
         uint256 prize = room.balance;
         require(prize > 0, "No prize balance");
 
-        winners[codeHash] = winner;
+        winners[docIdHash] = winner;
         room.status = RoomStatus.INACTIVE;
         room.balance = 0;
 
         (bool ok, ) = payable(winner).call{value: prize}("");
         require(ok, "Winner payout failure");
-
-        emit WinnerSelected(codeHash, winner, prize);
     }
 
-    function joinRoom(bytes32 codeHash) external {
-        if (!_isRoomExist(codeHash)) revert ErrorRoomIsNotExist(codeHash);
+    function roomParticipants(
+        bytes32 docIdHash
+    ) external view returns (address[] memory) {
+        return participants[docIdHash];
+    }
 
-        Room storage room = rooms[codeHash];
+    function joinRoom(bytes32 docIdHash) external {
+        if (!_isRoomExist(docIdHash)) revert ErrorRoomIsNotExist(docIdHash);
+
+        Room storage room = rooms[docIdHash];
         if (msg.sender == room.creator) {
-            revert ErrorUserIsTheRoomOwner(codeHash);
+            revert ErrorUserIsTheRoomOwner(docIdHash);
         }
 
         if (room.status != RoomStatus.ACTIVE) {
-            revert ErrorRoomIsNotActive(codeHash);
+            revert ErrorRoomIsNotActive(docIdHash);
         }
 
         if (room.totalParticipant >= room.maxParticipant) {
-            revert ErrorRoomIsFull(codeHash);
+            revert ErrorRoomIsFull(docIdHash);
         }
 
-        bool joined = hasJoined[codeHash][msg.sender];
-        if (joined) revert ErrorUserAlreadyJoinRoom(codeHash);
+        bool joined = hasJoined[docIdHash][msg.sender];
+        if (joined) revert ErrorUserAlreadyJoinRoom(docIdHash);
 
-        hasJoined[codeHash][msg.sender] = true;
+        hasJoined[docIdHash][msg.sender] = true;
         room.totalParticipant++;
-        participants[codeHash].push(msg.sender);
+        participants[docIdHash].push(msg.sender);
     }
 
-    function leaveRoom(bytes32 codeHash) external {
-        if (!_isRoomExist(codeHash)) {
-            revert ErrorRoomIsNotExist(codeHash);
+    function leaveRoom(bytes32 docIdHash) external {
+        if (!_isRoomExist(docIdHash)) {
+            revert ErrorRoomIsNotExist(docIdHash);
         }
 
-        Room storage room = rooms[codeHash];
+        Room storage room = rooms[docIdHash];
         if (room.status != RoomStatus.ACTIVE) {
-            revert ErrorRoomIsNotActive(codeHash);
+            revert ErrorRoomIsNotActive(docIdHash);
         }
 
-        bool joined = hasJoined[codeHash][msg.sender];
-        if (!joined) revert ErrorUserIsNotParticipant(codeHash);
+        bool joined = hasJoined[docIdHash][msg.sender];
+        if (!joined) revert ErrorUserIsNotParticipant(docIdHash);
 
         room.totalParticipant--;
-        hasJoined[codeHash][msg.sender] = false;
+        hasJoined[docIdHash][msg.sender] = false;
 
-        uint256 length = participants[codeHash].length;
+        uint256 length = participants[docIdHash].length;
         for (uint256 i = 0; i < length; i++) {
-            if (participants[codeHash][i] == msg.sender) {
-                participants[codeHash][i] = participants[codeHash][length - 1];
-                participants[codeHash].pop();
+            if (participants[docIdHash][i] == msg.sender) {
+                participants[docIdHash][i] = participants[docIdHash][
+                    length - 1
+                ];
+                participants[docIdHash].pop();
                 break;
             }
         }
     }
 
-    function closeRoom(bytes32 codeHash) external onlyCreator(codeHash) {
-        Room storage room = rooms[codeHash];
+    function closeRoom(bytes32 docIdHash) external onlyCreator(docIdHash) {
+        Room storage room = rooms[docIdHash];
         if (room.status != RoomStatus.ACTIVE) {
-            revert ErrorRoomIsNotActive(codeHash);
+            revert ErrorRoomIsNotActive(docIdHash);
         }
 
         uint256 refund = room.balance;
@@ -181,8 +191,8 @@ contract Pickr is IPickr {
         }
     }
 
-    function _isRoomExist(bytes32 codeHash) private view returns (bool) {
-        return rooms[codeHash].creator != address(0);
+    function _isRoomExist(bytes32 docIdHash) private view returns (bool) {
+        return rooms[docIdHash].creator != address(0);
     }
 
     receive() external payable {
