@@ -28,10 +28,10 @@ contract Pickr is IPickr {
 
     // main functions
     function createRoom(
-        bytes32 codeHash,
+        bytes32 docIdHash,
+        RoomAccessMode accessMode,
         uint256 minParticipant,
-        uint256 maxParticipant,
-        bytes32 docIdHash
+        uint256 maxParticipant
     ) external payable {
         if (msg.value == 0) revert ErrorDepositRequired();
 
@@ -50,11 +50,10 @@ contract Pickr is IPickr {
             msg.sender,
             msg.value,
             RoomStatus.ACTIVE,
-            RoomAccessMode.PRIVATE,
+            accessMode,
             maxParticipant,
             minParticipant,
             0,
-            1,
             uint64(block.timestamp)
         );
 
@@ -74,8 +73,6 @@ contract Pickr is IPickr {
         if (msg.value == 0) revert ErrorDepositRequired();
 
         room.balance += msg.value;
-
-        emit RoomDeposited(docIdHash, msg.value);
     }
 
     function startRoom(bytes32 docIdHash) external onlyCreator(docIdHash) {
@@ -89,8 +86,6 @@ contract Pickr is IPickr {
         }
 
         room.status = RoomStatus.STARTED;
-
-        emit RoomStarted(docIdHash);
     }
 
     function winnerSelected(
@@ -193,6 +188,23 @@ contract Pickr is IPickr {
 
     function _isRoomExist(bytes32 docIdHash) private view returns (bool) {
         return rooms[docIdHash].creator != address(0);
+    }
+
+    function getUserRoomCodes(
+        address creator
+    ) external view returns (bytes32[] memory) {
+        return roomCodesByCreator[creator];
+    }
+
+    function getUserRooms(
+        address creator
+    ) external view returns (Room[] memory, bytes32[] memory) {
+        bytes32[] memory codes = roomCodesByCreator[creator];
+        Room[] memory list = new Room[](codes.length);
+        for (uint256 i = 0; i < codes.length; i++) {
+            list[i] = rooms[codes[i]];
+        }
+        return (list, codes);
     }
 
     receive() external payable {

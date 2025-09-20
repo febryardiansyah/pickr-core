@@ -13,11 +13,6 @@ interface IPickr {
         PRIVATE
     }
 
-    event RoomCreated(bytes32 codeHash, address creator);
-    event RoomDeposited(bytes32 codeHash, uint256 balance);
-    event RoomStarted(bytes32 codeHash);
-    event WinnerSelected(bytes32 codeHash, address winner, uint256 prize);
-
     // models
     struct Room {
         address creator;
@@ -27,7 +22,6 @@ interface IPickr {
         uint256 maxParticipant;
         uint256 minParticipant;
         uint256 totalParticipant;
-        uint256 totalWinner;
         uint64 createdAt;
     }
 
